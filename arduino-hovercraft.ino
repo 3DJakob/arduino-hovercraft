@@ -2,6 +2,7 @@
 
 Servo esc1;
 Servo esc2;
+Servo servo;
 
 int startPin = 12;
 int servoPin = 3;
@@ -24,6 +25,9 @@ int senseLValue;
 int senseFValue;
 int senseRValue;
 
+int maxSensorValue = 500;
+int minSensorValue = 50;
+
 void setup() {
   pinMode(servoPin, OUTPUT);
   pinMode(motor1Pin, OUTPUT);
@@ -39,12 +43,11 @@ void setup() {
 
   esc1.attach(motor1Pin);
   esc2.attach(motor2Pin);
+  servo.attach(servoPin);
 
 
   Serial.begin(9600);
   Serial.println("Starting");
-
-
 }
 
 void loop() {
@@ -56,7 +59,7 @@ void loop() {
 
     digitalWrite(greenPin, HIGH);
     digitalWrite(redPin, LOW);
-
+    servoSteering();
 
 
   } else {
@@ -65,6 +68,8 @@ void loop() {
 
     esc1.writeMicroseconds(1100);
     esc2.writeMicroseconds(1100);
+    servo.write(45);
+
     analogWrite(yellowPin, 0);
 
     digitalWrite(redPin, HIGH);

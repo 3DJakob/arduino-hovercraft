@@ -1,14 +1,8 @@
 void runEsc(int motorNumber) {
   if (motorNumber == 1){
     esc1.writeMicroseconds(motor1Value);
-
-    Serial.println("Motor 1 runing!");
-    Serial.println(motor1Value);
   } else {
     esc2.writeMicroseconds(motor2Value);
-
-    Serial.println("Motor 2 runing!");
-    Serial.println(motor2Value);
   }
 }
 
