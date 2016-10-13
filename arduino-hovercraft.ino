@@ -25,6 +25,8 @@ int senseLValue;
 int senseFValue;
 int senseRValue;
 
+float lastTurnValue = 1000;
+
 int maxSensorValue = 500;
 int minSensorValue = 50;
 

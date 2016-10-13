@@ -3,16 +3,19 @@ void servoSteering() {
   senseFValue = map(analogRead(senseFPin), minSensorValue, maxSensorValue, maxSensorValue, minSensorValue);
   senseRValue = analogRead(senseRPin);
 
-  // senseLValue = 470;
-  // senseFValue = 470;
-  // senseRValue = 0;
-
   float top = senseFValue*1+senseRValue*2;
   float bottom = senseLValue+senseFValue+senseRValue;
 
   float turnValue = (top / bottom)*1000; // 0 < turnValue > 2000
+  //float smoothingValue = lastTurnValue + ((turnValue - lastTurnValue)/2);
+  int turnAngle = map(turnValue, 0, 2000, 180, 0);
 
-  float turnAngle = map(turnValue, 0, 2000, 90, 0);
+  for (int turnAngleIterator = turnAngle; turnAngleIterator > 0; turnAngleIterator = turnAngleIterator - 1) {
+    Serial.print("#");
+  }
+  Serial.print(turnAngle);
+  Serial.println();
 
   servo.write(turnAngle);
+  //float lastTurnValue = turnValue;
 }
