@@ -16,6 +16,6 @@ void servoSteering() {
   Serial.print(turnAngle);
   Serial.println();
 
-  servo.write(turnAngle);
+  steeringServo.write(turnAngle);
   //float lastTurnValue = turnValue;
 }

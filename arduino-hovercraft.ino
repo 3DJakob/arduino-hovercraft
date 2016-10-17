@@ -2,10 +2,12 @@
 
 Servo esc1;
 Servo esc2;
-Servo servo;
+Servo steeringServo;
+Servo chairServo;
 
 int startPin = 12;
-int servoPin = 3;
+int steeringServoPin = 3;
+int chairServoPin = 4;
 int motor1Pin = 5;
 int motor2Pin = 6;
 
@@ -28,10 +30,11 @@ int senseRValue;
 float lastTurnValue = 1000;
 
 int maxSensorValue = 500;
-int minSensorValue = 50;
+int minSensorValue = 80;
 
 void setup() {
-  pinMode(servoPin, OUTPUT);
+  pinMode(steeringServoPin, OUTPUT);
+  pinMode(chairServoPin, OUTPUT);
   pinMode(motor1Pin, OUTPUT);
   pinMode(motor2Pin, OUTPUT);
 
@@ -45,23 +48,30 @@ void setup() {
 
   esc1.attach(motor1Pin);
   esc2.attach(motor2Pin);
-  servo.attach(servoPin);
+  steeringServo.attach(steeringServoPin);
+  chairServo.attach(chairServoPin);
 
 
   Serial.begin(9600);
   Serial.println("Starting");
+
+  chairServo.write(90);
 }
 
 void loop() {
 
   if (digitalRead(startPin)) {
 
-    motorThrottle(2000, 1);
+    motorThrottle(1200, 1);
     motorThrottle(1500, 2);
 
     digitalWrite(greenPin, HIGH);
     digitalWrite(redPin, LOW);
     servoSteering();
+
+    if (senseFValue < 100) {
+      chairServo.write(0);
+    }
 
 
   } else {
@@ -70,7 +80,7 @@ void loop() {
 
     esc1.writeMicroseconds(1100);
     esc2.writeMicroseconds(1100);
-    servo.write(45);
+    steeringServo.write(45);
 
     analogWrite(yellowPin, 0);
 
