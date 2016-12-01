@@ -11,9 +11,9 @@ int chairServoPin = 4;
 int motor1Pin = 5;
 int motor2Pin = 6;
 
-int senseLPin = 0;
-int senseFPin = 1;
-int senseRPin = 2;
+int senseFPin = A0;
+int senseLPin = A1;
+int senseRPin = A2;
 
 int greenPin = 9;
 int yellowPin = 10;
@@ -31,6 +31,7 @@ float lastTurnValue = 1000;
 
 int maxSensorValue = 500;
 int minSensorValue = 80;
+float filterValue = 10;
 
 void setup() {
   pinMode(steeringServoPin, OUTPUT);
@@ -60,9 +61,8 @@ void setup() {
 
 void loop() {
 
-  if (digitalRead(startPin)) {
-
-    motorThrottle(1200, 1);
+  if (startPin) {
+    motorThrottle(1000, 1);
     motorThrottle(1500, 2);
 
     digitalWrite(greenPin, HIGH);
@@ -72,8 +72,6 @@ void loop() {
     if (senseFValue < 100) {
       chairServo.write(0);
     }
-
-
   } else {
     motor1Value = 1100;
     motor2Value = 1100;

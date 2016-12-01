@@ -6,16 +6,23 @@ void servoSteering() {
   float top = senseFValue*1+senseRValue*2;
   float bottom = senseLValue+senseFValue+senseRValue;
 
-  float turnValue = (top / bottom)*1000; // 0 < turnValue > 2000
-  //float smoothingValue = lastTurnValue + ((turnValue - lastTurnValue)/2);
-  int turnAngle = map(turnValue, 0, 2000, 180, 0);
+  float turnValue = lastTurnValue + ((((top / bottom)*1000) - lastTurnValue)/filterValue);
+  lastTurnValue = turnValue;
 
-  for (int turnAngleIterator = turnAngle; turnAngleIterator > 0; turnAngleIterator = turnAngleIterator - 1) {
+  int turnAngle = map(turnValue, 600, 1400, 180, 0);
+
+
+  for (int turnAngleIterator = turnAngle; turnAngleIterator > 0; turnAngleIterator = turnAngleIterator - 5) {
     Serial.print("#");
   }
   Serial.print(turnAngle);
   Serial.println();
 
-  steeringServo.write(turnAngle);
-  //float lastTurnValue = turnValue;
+  if (turnAngle > 180) {
+    steeringServo.write(180);
+  } else if (turnAngle < 0) {
+    steeringServo.write(0);
+  } else {
+    steeringServo.write(turnAngle);
+  }
 }
