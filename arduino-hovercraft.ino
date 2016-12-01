@@ -57,6 +57,10 @@ void setup() {
   Serial.println("Starting");
 
   chairServo.write(90);
+
+  motorThrottle(1000, 1);
+  motorThrottle(1000, 2);
+  delay(2000);
 }
 
 void loop() {
