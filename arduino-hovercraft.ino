@@ -5,15 +5,15 @@ Servo esc2;
 Servo steeringServo;
 Servo chairServo;
 
-int startPin = 12;
-int steeringServoPin = 3;
-int chairServoPin = 4;
-int motor1Pin = 5;
-int motor2Pin = 6;
+int startPin = 0;
+int steeringServoPin = 13;
+int chairServoPin = 12;
+int motor1Pin = 6;
+int motor2Pin = 5;
 
 int senseFPin = A0;
-int senseLPin = A1;
-int senseRPin = A2;
+int senseLPin = A2;
+int senseRPin = A1;
 
 int greenPin = 9;
 int yellowPin = 10;
@@ -65,14 +65,14 @@ void setup() {
 
 void loop() {
 
-  if (startPin) {
+  if (true) {
     motorThrottle(1000, 1);
-    motorThrottle(1500, 2);
+    motorThrottle(1000, 2);
 
     digitalWrite(greenPin, HIGH);
     digitalWrite(redPin, LOW);
     servoSteering();
-
+    chairServo.write(180);
     if (senseFValue < 100) {
       chairServo.write(0);
     }
@@ -80,8 +80,8 @@ void loop() {
     motor1Value = 1100;
     motor2Value = 1100;
 
-    esc1.writeMicroseconds(1100);
-    esc2.writeMicroseconds(1100);
+    esc1.writeMicroseconds(1000);
+    esc2.writeMicroseconds(1000);
     steeringServo.write(45);
 
     analogWrite(yellowPin, 0);
