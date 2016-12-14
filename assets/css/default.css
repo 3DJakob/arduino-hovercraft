@@ -10,6 +10,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 h1, h2, h3, a, p {
@@ -19,4 +20,25 @@ h1, h2, h3, a, p {
 h1 {
   font-family: 'Bungee', cursive;
   color: #fff;
+  text-align: center;
+}
+
+div.container {
+  background-color: #fff;
+  max-width: 700px;
+  margin: 0 20px;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container div {
+  max-width: 600px;
+}
+
+.container img {
+  width: 48%;
+  margin: 0 auto;
 }
