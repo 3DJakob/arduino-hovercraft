@@ -17,6 +17,10 @@ h1, h2, h3, a, p {
   font-family: sans-serif;
 }
 
+h1, h2, h3 {
+  font-family: 'Bungee', cursive;
+}
+
 h1 {
   font-family: 'Bungee', cursive;
   color: #fff;
@@ -35,10 +39,18 @@ div.container {
 }
 
 .container div {
-  max-width: 600px;
+  width: 100%;
+  padding: 0;
 }
 
 .container img {
-  width: 48%;
+  width: 49%; // 50% scales incorrectly
   margin: 0 auto;
+  padding: 0;
+}
+
+.container a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
